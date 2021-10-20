@@ -1,0 +1,60 @@
+ 
+//lips
+
+
+1
+fill(120, 73, 37)
+noStroke()
+beginShape()
+  vertex(10,80)
+  bezierVertex(-13,70,-19,75,-30,80)
+  endShape()
+beginShape()
+  vertex(-10,80)
+  bezierVertex(13,70,19,75,30,80)
+  endShape()
+
+  fill(120, 73, 37)
+  stroke(120, 73, 37)
+  strokeWeight(.5)
+  curve(20,20,-30,80,30,80,20,-20)
+
+
+2
+fill(120)
+noStroke()
+beginShape()
+  vertex(10,80)
+  bezierVertex(9,60,-19,75,-30,80)
+  endShape()
+beginShape()
+  vertex(-10,80)
+  bezierVertex(-9,60,19,75,30,80)
+  endShape()
+
+  stroke(120, 73, 37)
+  strokeWeight(.5)
+  curve(20,20,-30,80,30,80,20,-20)
+  fill(0)
+    line(-30,80,30,80)
+  fill(120)
+noStroke()
+beginShape()
+  vertex(10,80)
+  bezierVertex(-20,50,-19,75,-30,80)
+  endShape()
+beginShape()
+  vertex(-10,80)
+  bezierVertex(20,50,19,75,30,80)
+  endShape()
+
+  stroke(120, 73, 37)
+  strokeWeight(.5)
+  curve(20,-40,-30,80,30,80,20,-40)
+  fill(0)
+    line(-30,80,30,80)
+
+
+    3
+
+
