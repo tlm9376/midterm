@@ -29,25 +29,90 @@ let fhIdx = 0;
 let myGL = [];
 let glIdx = 0;
 
+//create the movable earring
+let ringArr=[]
+//enabling the move, initiate as still
+let moving = false;
+
+let studArr=[]
+let stud1
+
+class Ring{
+  constructor(x,y){
+    this.x=x
+    this.y=y
+  }
+  show(){
+    
+  if(!moving){
+  noFill()
+  stroke("gold")
+  strokeWeight(2)
+
+  arc(this.x, this.y, 25, 19, 5.5, PI + QUARTER_PI);
+  } else{
+    this.x=mouseX;
+    this.y=mouseY;
+  noFill()
+  stroke("gold")
+  strokeWeight(2)
+  arc(this.x, this.y, 25, 19, 5.5,PI+ QUARTER_PI);
+  }
+  
+  }
+ 
+}
+
+// class Stud
+class Stud{
+  constructor(u,v){
+  this.u=u
+  this.v=v
+  }
+  
+showStud(){
+
+    image(studImg,this.u,this.v)
+
+  }
+  
+}
+
 //creating the color picker for skin tones.
 //I learned how to do this on this website:
 //https://www.geeksforgeeks.org/p5-js-tint-function/
 function preload() {
   skinTintColor = color("#b8753b");
   hairTintColor = color("#3e17b3");
+  studImg = loadImage('features/stud.png')
+
 }
 
 //lines 40 and 42 are part of what I leared from:
 //https://www.geeksforgeeks.org/p5-js-tint-function/
 function changeSkinTint() {
+  // Update the current tint color
   skinTintColor = skinColPicker.color();
 }
 function changeHairTint() {
+  // Update the current tint color
   hairTintColor = hairColPicker.color();
 }
 function setup() {
   createCanvas(800, 800);
+  
+  //pushing a new earring
+  
+    for (let i = 0; i < 30; i++) {
+        ringArr.push(new Ring(200,50));
+    }
+stud1 = new Stud(44,43)
+studArr.push(new Stud(350,30));
 
+  for (let i = 0; i < 30; i++) {
+        studArr.push(new Stud(350,30));
+    }
+//setting up the color picker
   //lines 50-52 are part of what I leared from:
   //https://www.geeksforgeeks.org/p5-js-tint-function/
   skinColPicker = createColorPicker("#b8753b");
@@ -72,8 +137,9 @@ function setup() {
   myNose[1] = loadImage("features/nose2.png");
   myNose[2] = loadImage("features/nose3.png");
   myNose[3] = loadImage("features/nose4.png");
-  myNose[4] = loadImage("features/nose5.png");
-  myNose[5] = loadImage("features/nose0.png");
+    myNose[4] = loadImage("features/nose0.png");
+      myNose[5] = loadImage("features/nose5.png");
+
 
   myLips[0] = loadImage("features/lips0.png");
   myLips[1] = loadImage("features/lips1.png");
@@ -111,7 +177,6 @@ function setup() {
   myEyeWhites[3] = loadImage("features/eyes3whites.png");
   myEyeWhites[4] = loadImage("features/eyes4whites.png");
   myEyeWhites[5] = loadImage("features/eyes5whites.png");
-
 
   myIris[0] = loadImage("features/iris4.png");
   myIris[1] = loadImage("features/iris1.png");
@@ -260,6 +325,7 @@ function setup() {
       glIdx = 0;
     }
   };
+  
 }
 
 function draw() {
@@ -275,10 +341,26 @@ function draw() {
   noTint();
   image(myEyeWhites[eyeIdx], 0, 0);
   image(myIris[irisIdx], 0, 0);
+//drawing the earrings
 
+ for (var i = 0; i < 30; i ++ ) { 
+  ringArr[i].show();
+
+}
+
+
+  stud1.showStud()
+
+
+for (let j = 0; j < studArr.length; j ++ ) { 
+  studArr[j].showStud();
+
+
+}
   //hair tint
   tint(hairTintColor);
   image(myBrows[browIdx], 0, 0);
+ 
 
   image(myFH[fhIdx], 0, 0);
   image(myHair[hairIdx], 0, 0);
@@ -295,6 +377,33 @@ function draw() {
   fhButton.draw();
   glButton.draw();
   fill(300);
+  noStroke()
   text("s k i n  t o n e", 75, 25);
   text("h a i r  c o l o r", 75, 57);
+  fill("gold")
+  text("p l a c e  t h e  r i n g",200,35)
+  fill("white")
+   text("p r e s s   a n y   k e y", 360,30)
+  text("t o   a d d   a   s t u d",360,46)
+ 
+ 
 }
+
+function mouseDragged() {
+  
+  moving=true;
+
+  
+}
+
+function mouseReleased(){
+  moving=false;
+}
+function keyPressed(){
+
+ let s = new Stud(mouseX,mouseY); // Make a new stud at the mouse location.
+  studArr.push(s);
+
+
+}
+
